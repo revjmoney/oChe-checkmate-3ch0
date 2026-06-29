@@ -1,6 +1,10 @@
 # oChe-checkmate-3ch0 🐒🔓
 ### Liberating the Amazon Echo Show 5 (2nd gen, codename **CRONOS**) — root, de-bloat, de-spy, and run your own apps.
 
+![See no evil · hear no evil · speak no evil](screenshots/see-hear-speak-banner.png)
+
+> *A device that can't watch you, can't hear you, and can't phone home.* 👽🔇
+
 > *"This thing is a piece of sh\*t at best when stock, I f\*\*king hate it."* — the author, ~6 hours before it became his favorite gadget.
 
 This is a **lab-grade, reproducible writeup** of taking a locked-down, secure-booted, anti-rollback-fused Amazon Echo Show 5 (2nd gen) from a spy-clock appliance to a **fully rooted, de-Amazoned, Bluetooth-speaker, custom-app-running open Android panel** — with **Magisk root**, a third-party launcher, the surveillance ripped out, and home-built apps signed against the Android SDK.
@@ -36,6 +40,16 @@ Part of the **Simian Tactical Toolbox**. 🐒🔫
 
 ---
 
+## 📸 The result — LineageOS 18.1 on a liberated Echo Show 5
+
+| 🎆 BackyardPyro (fullscreen fireworks clock) | 👽 LineageOS home | 📟 About |
+|---|---|---|
+| ![pyro](screenshots/pyro-fireworks-clock.png) | ![home](screenshots/lineageos-home-aliens.png) | ![about](screenshots/lineageos-about.png) |
+
+*Android 11 · de-Amazoned · fireworks shells spelling the time · "see/hear/speak no evil" on the home screen · **0 crashes** in the first-boot log.*
+
+---
+
 ## 📦 Repo contents
 
 ```
@@ -47,7 +61,11 @@ oChe-checkmate-3ch0/
 ├── docs/
 │   ├── 00-device-facts.md
 │   ├── commands-in-order.md      ← every command, copy-paste, in sequence
-│   └── gotchas.md                ← the traps that ate hours (read this!)
+│   ├── gotchas.md                ← the traps that ate hours (read this!)
+│   ├── fdroid-privileged-extension.md
+│   ├── space-reclaim.md
+│   ├── linux-deploy.md
+│   └── lineageos-migration.md    ← THE ENDGAME: ditch Fire OS for clean Android 11
 ├── apps/
 │   ├── godmode/                  ← GOD MODE app source + build.ps1
 │   ├── displayoff/               ← Display Off tile source + build.ps1
