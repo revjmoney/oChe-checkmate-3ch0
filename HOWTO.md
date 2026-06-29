@@ -122,11 +122,14 @@ adb shell "su -c 'magisk -c'"   # -> 30.7:MAGISK:R (30700)
   resurrects disabled apps). **Keep WiFi off until both are disabled.**
 - For apps that *still* won't stay disabled (the **launcher**), use
   **`pm uninstall --user 0 <pkg>`** — the framework re-*enables* but won't re-*install* (offline).
-  Reverse with `pm install-existing <pkg>` or factory reset.
+  Reverse on this 7.1 build (no `install-existing` — see gotchas): reinstall the system APK,
+  `pm install -r --user 0 /system/priv-app/<pkg>/<pkg>.apk`, then `pm enable <pkg>`.
 - **NEVER disable** the load-bearing set: framework/`fireos`, `systemui`, `settings` +
   `device.settings`, **webview/chromium/knightwebview**, `bluestone.keyboard`, wifi profile manager,
   `echoaudioservice` (also drives the **speaker**), all `knight.*` *except* the timeout one (below),
-  `mediatek.*`, account `identity`/`dcp`, and anything `*.api` / `*.sdk` / `*.library`.
+  `mediatek.*`, account `identity`/`dcp`, **`amazon.speech.sim`** (SystemUI binds it — crashes
+  without it), **`com.amazon.kindle.otter.oobe`** (Settings reads its resources — crashes without
+  it), and anything `*.api` / `*.sdk` / `*.library`.
 
 ```bash
 # --- kill OTA (do this first; also covered by the hosts block in §8) ---
@@ -154,7 +157,7 @@ adb shell "pm disable-user --user 0 com.amazon.zordon"
 adb shell "pm disable-user --user 0 com.android.camera2"
 
 # --- bloat batch 3: Alexa / voice / comms / smarthome / setup / remote-mgmt (~41 pkgs) ---
-for p in amazon.speech.davs.davcservice amazon.speech.sim \
+for p in amazon.speech.davs.davcservice \
  com.amazon.alexa.awaservice com.amazon.alexa.beaconbroadcaster com.amazon.alexa.datastore.app \
  com.amazon.alexa.externalmediaplayer.fireos com.amazon.alexa.identity com.amazon.alexa.timeoutmanagerapp \
  com.amazon.alexa.visionapp com.amazon.alexa.webmediaplayer.fireos com.amazon.alexaviz \
@@ -166,7 +169,7 @@ for p in amazon.speech.davs.davcservice amazon.speech.sim \
  com.amazon.device.smarthome.dshs.endpointdetectorCA com.amazon.device.smarthome.dshs.multimodalux \
  com.amazon.device.smarthome.dshs.services com.amazon.gloria.smarthome com.amazon.device.gadgetscontrolmanager \
  com.amazon.apl.awsanalyticsextension com.amazon.assetsync.service \
- com.amazon.amasetup.service com.amazon.kindle.otter.oobe com.amazon.ods.kindleconnect \
+ com.amazon.amasetup.service com.amazon.ods.kindleconnect \
  com.amazon.device.sync com.amazon.virtual.dash.knight.app \
  com.amazon.alarms com.amazon.clockfaceselector com.amazon.selector.clock.resources \
  com.amazon.wha.mediabrowserservice com.ring.halo.messaging; do
@@ -208,7 +211,7 @@ adb shell "cmd package set-home-activity fr.neamar.kiss/fr.neamar.kiss.MainActiv
 # The Echo home launcher is com.amazon.paladin (its .app.MMLauncherActivity / "MMLauncher").
 # disable-user does NOT hold (protected app; framework flips it back within seconds, even offline,
 # and the two launchers visibly fight). UNINSTALL-for-user is the fix that sticks:
-adb shell "pm uninstall --user 0 com.amazon.paladin"   # reverse: cmd package install-existing com.amazon.paladin
+adb shell "pm uninstall --user 0 com.amazon.paladin"   # reverse (7.1): pm install -r --user 0 /system/priv-app/com.amazon.paladin/com.amazon.paladin.apk
 ```
 
 ---
@@ -336,8 +339,8 @@ apksigner sign --ks debug.keystore --ks-pass pass:android --out out\App.apk out\
 - Restore boot: `adb shell "su -c 'dd if=/sdcard/boot-current.img of=/dev/block/mmcblk0p9'"`
   (boot has **no anti-rollback** — always safe to reflash).
 - Worst case: `restore.bat` from your amonet backup (§1) brings the OS back.
-- Re-enable anything over-disabled: `adb shell "pm enable <pkg>"` or
-  `adb shell "cmd package install-existing <pkg>"`.
+- Re-enable a disabled pkg: `adb shell "pm enable <pkg>"`. Undo an uninstall-for-user (7.1 has no
+  `install-existing`): `adb shell "su -c 'pm install -r --user 0 /system/priv-app/<pkg>/<pkg>.apk'"`.
 
 See **docs/gotchas.md** for the consolidated trap list and **docs/commands-in-order.md** for a flat,
 copy-paste command sequence.

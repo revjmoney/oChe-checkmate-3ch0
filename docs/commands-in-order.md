@@ -25,7 +25,7 @@ for p in com.amazon.avod com.netflix.mediaclient.echo com.amazon.alexa.youtube.a
  com.amazon.device.crashmanager com.amazon.device.logmanager com.amazon.wirelessmetrics.service \
  com.amazon.hybridadidservice com.amazon.device.metrics com.amazon.client.metrics \
  com.amazon.zordon com.android.camera2 \
- amazon.speech.davs.davcservice amazon.speech.sim com.amazon.alexa.awaservice com.amazon.alexa.beaconbroadcaster \
+ amazon.speech.davs.davcservice com.amazon.alexa.awaservice com.amazon.alexa.beaconbroadcaster \
  com.amazon.alexa.datastore.app com.amazon.alexa.externalmediaplayer.fireos com.amazon.alexa.identity \
  com.amazon.alexa.timeoutmanagerapp com.amazon.alexa.visionapp com.amazon.alexa.webmediaplayer.fireos com.amazon.alexaviz \
  com.amazon.a4b.conferencing.chime com.amazon.a4b.mcc com.amazon.callexperiencecontroller.capabilityagent \
@@ -35,7 +35,7 @@ for p in com.amazon.avod com.netflix.mediaclient.echo com.amazon.alexa.youtube.a
  com.amazon.device.smarthome.dshs.endpointdetectorCA com.amazon.device.smarthome.dshs.multimodalux \
  com.amazon.device.smarthome.dshs.services com.amazon.gloria.smarthome com.amazon.device.gadgetscontrolmanager \
  com.amazon.apl.awsanalyticsextension com.amazon.assetsync.service com.amazon.amasetup.service \
- com.amazon.kindle.otter.oobe com.amazon.ods.kindleconnect com.amazon.device.sync com.amazon.virtual.dash.knight.app \
+ com.amazon.ods.kindleconnect com.amazon.device.sync com.amazon.virtual.dash.knight.app \
  com.amazon.alarms com.amazon.clockfaceselector com.amazon.selector.clock.resources com.amazon.wha.mediabrowserservice \
  com.ring.halo.messaging com.amazon.tcomm com.amazon.tcomm.client com.amazon.tcomm.jackson \
  com.amazon.whisperjoin.middleware.v2.np com.amazon.whisperjoin.wss.wifiprovisioner com.amazon.wifi.sync \

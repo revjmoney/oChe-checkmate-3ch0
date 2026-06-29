@@ -1,9 +1,9 @@
 # Reclaim space
 
 `/data` on this device is small (~2 GB free). `disable-user` keeps an app's data + odex;
-**`uninstall --user 0`** removes them (frees space) and is still reversible via
-`cmd package install-existing <pkg>`. The APK itself lives on read-only `/system` and can't be
-freed without modifying system.
+**`uninstall --user 0`** removes them (frees space) and is reversible by reinstalling the on-disk
+system APK (this 7.1 build has no `install-existing` — see below). The APK itself lives on read-only
+`/system` and can't be freed without modifying system.
 
 ## 1. Trim all app caches (safe, instant)
 `pm trim-caches` wants a size **with a K/M/G suffix** (a bare huge number errors with
@@ -25,9 +25,11 @@ adb shell "df -h /data"
 ```
 
 ## Restore anything later
+`install-existing` is missing on this Fire OS 7.1 build — reinstall the on-disk system APK instead:
 ```
-adb shell "cmd package install-existing <pkg>"     # brings a uninstalled-for-user app back
-adb shell "pm enable <pkg>"                          # re-enable a disabled app
+# undo a uninstall-for-user (find the APK first): find /system -iname '*.apk' | grep <name>
+adb shell "su -c 'pm install -r --user 0 /system/priv-app/<pkg>/<pkg>.apk'"   # -> Success
+adb shell "pm enable <pkg>"                                                    # re-enable a disabled app
 ```
 
 > Don't uninstall AOSP/system components blindly (`pm list packages -d` also lists system

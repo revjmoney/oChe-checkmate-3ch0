@@ -31,6 +31,40 @@ A consolidated list of every non-obvious thing that bit during this project. Rea
 - **Never** disable `*.api`/`*.sdk`/`*.library` (other apps link them), `echoaudioservice` (also the
   speaker), webview, keyboard, `knight.*` (except ecs), `mediatek.*`, identity/dcp.
 
+### `install-existing` is MISSING on this Fire OS 7.1 build
+Both `cmd package install-existing <pkg>` and `pm install-existing <pkg>` return "Unknown command"
+/ dump the `pm` help. So you **cannot** undo a `pm uninstall --user 0` the usual way. To restore a
+**system** app you uninstalled-for-user, reinstall its on-disk APK directly:
+```
+find /system -iname '*.apk' 2>/dev/null | grep -i <name>          # locate it (in /system/priv-app or /system/app)
+pm install -r --user 0 /system/priv-app/<pkg>/<pkg>.apk           # re-register for user 0  -> "Success"
+pm enable <pkg>                                                    # if it was also disabled
+```
+This is THE reversal method on this device. (Disabled-but-not-uninstalled apps still just need
+`pm enable <pkg>`.)
+
+### Load-bearing Amazon "glue" — DO NOT disable (Fire OS system apps crash)
+These look like bloat but Fire OS **system apps hard-depend on them** and crash-loop if removed:
+- **`amazon.speech.sim`** — `com.android.systemui` binds to it (`SimConnectionListener` / "SimClient");
+  without it SystemUI throws `RuntimeException: SimClient was never got created` every ~10 min
+  (`com.amazon.systemui.common.SimConnectionListerner.onFinish`). Re-enable: `pm enable amazon.speech.sim`.
+- **`com.amazon.kindle.otter.oobe`** — `com.android.settings` reads a "launched countries" resource
+  out of it on startup (`com.amazon.oobe.commons.accounts.CountryHelper.getLaunchedCountries`);
+  without it Settings (and `SettingsProxyContentProvider`) crash with
+  `NameNotFoundException: com.amazon.kindle.otter.oobe`. Re-add (see "install-existing missing" below):
+  `pm install -r --user 0 /system/priv-app/com.amazon.kindle.otter.oobe/com.amazon.kindle.otter.oobe.apk`
+  then `pm enable com.amazon.kindle.otter.oobe`.
+
+  These are dependency glue, NOT surveillance — keep them enabled; everything user-facing (Alexa,
+  ads, telemetry, OTA) stays gutted. `amazon.speech.sim` holds a **system-fixed** `RECORD_AUDIO`
+  perm that `pm revoke` can't remove — fine, the always-listening services are disabled + mute
+  button cuts the mic in hardware.
+  Diagnose any "X has stopped": `adb shell "logcat -b crash -d | grep -A40 'Process: <pkg>'"` and
+  read the `Caused by:` / `NameNotFoundException` line → re-enable that package.
+- **Known cosmetic casualty:** stock **Settings → Sound → Equalizer (EQ) page crashes** — it binds to
+  a disabled Amazon audio component. Not worth re-enabling Alexa-media junk for one EQ screen; use
+  **VLC's built-in equalizer** or your **BT-source phone's EQ** instead. The rest of Settings is fine.
+
 ### Launcher / apps
 - **`INSTALL_FAILED_OLDER_SDK`** = the APK's minSdk > device API 25 (Android 7.1). Lawnchair 15 and
   Nova 8 need Android 8. Use **KISS** (API 21+) / Lawnchair 2 / Nova 7.0.57.

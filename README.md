@@ -116,6 +116,11 @@ use the **Versions** tab to grab a build that supports **Android 7.1 / API 25**,
 - **SimpleSSHD** (Dropbear) by Greg Alexander
 - **F-Droid** — f-droid.org
 
+## 🎵 Soundtrack
+**`cockit_league.mp3`** (repo root) — an original track by Rev. J. Money. Crank it while you flash. 🔊
+
+---
+
 > Author: **Rev. J. Money** · GitHub **@revjmoney** · documented with an AI pair-programmer over one (1) gloriously profane session.
 >
 > *Fck de la Amazoné.* 🐒🔥 (lovingly)
