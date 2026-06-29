@@ -1,0 +1,43 @@
+# ===== LEGAL SEATBELT: never commit Amazon-copyrighted material =====
+# Firmware / partition images / exploit blobs
+*.img
+*.ab
+preloader*
+lk.bin
+tz.img
+microloader*
+cronos-kaeru*
+magisk_patched*
+boot-current*
+# Whole exploit bundle if you drop it in here
+amonet*/
+*amonet*
+full-2*.img
+
+# ===== Signing keys / secrets =====
+*.keystore
+*.jks
+*.pem
+*.p12
+id_ecdsa
+id_ecdsa.pub
+id_rsa*
+id_ed25519*
+
+# ===== Build artifacts =====
+out/
+obj/
+gen/
+*.idsig
+res-compiled.zip
+
+# ===== Third-party APKs you should download yourself (not redistribute here) =====
+Magisk-*.apk
+SimpleSSHD-*.apk
+F-Droid*.apk
+fr.neamar.kiss_*.apk
+
+# ===== OS cruft =====
+Thumbs.db
+.DS_Store
+desktop.ini
