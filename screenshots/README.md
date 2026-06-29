@@ -1,7 +1,5 @@
 # Screenshots
 
-Drop your captures here and reference them from the README/HOWTO. Suggested shots that help others:
-
 - `fastboot-getvar.png` — `fastboot getvar all` output (**redact serial**)
 - `amonet-bin.png` — the amonet `bin/` folder (shows `full-20240709.img` etc.) so people recognize a
   correct, version-matched bundle
@@ -13,6 +11,3 @@ Drop your captures here and reference them from the README/HOWTO. Suggested shot
 
 `simian-tactical-unit.png` is the project logo (yellow original). The blue/red recolors are the
 GOD MODE / Display Off app icons under `apps/godmode/res` and `apps/displayoff/res`.
-
-> Always scrub serial numbers, Bluetooth MACs, account names, and Wi-Fi SSIDs from screenshots
-> before committing.
