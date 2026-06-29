@@ -117,7 +117,9 @@ use the **Versions** tab to grab a build that supports **Android 7.1 / API 25**,
 - **F-Droid** — f-droid.org
 
 ## 🎵 Soundtrack
-**`cockit_league.mp3`** (repo root) — an original track by Rev. J. Money. Crank it while you flash. 🔊
+**"Cock It League"** — an original track by Rev. J. Money. Crank it while you flash. 🔊
+- 🎧 Stream: **[soundcloud.com/revjmoney/cock-it-leauge](https://soundcloud.com/revjmoney/cock-it-leauge)**
+- 💾 Or play locally: **`cockit_league.mp3`** in the repo root
 
 ---
 
