@@ -13,6 +13,27 @@ Part of the **Simian Tactical Toolbox**. 🐒🔫
 
 ---
 
+## 🎯 The endgame is LineageOS — but you can stop early
+
+**The real goal of this whole project is to replace Fire OS with [LineageOS 18.1](docs/lineageos-migration.md) (Android 11)** — clean, fast, fully de-Amazoned Android on hardware you own. The Fire OS rooting + debloat is the **on-ramp**, not the destination. Two valid finish lines:
+
+| Path | What you get | Caveat |
+|---|---|---|
+| **A) Full send → LineageOS** ⭐ | Clean Android 11, zero Amazon, working mic/audio/WiFi/BT, your own apps, **0 crashes** | Wipes Fire OS; **camera doesn't work** (known) |
+| **B) Stop at rooted Fire OS** | Magisk root + light debloat, keep Fire OS | A *fully* de-spied Fire OS is **unstable** |
+
+**Why LineageOS wins:** Fire OS is *designed* to be hostage to its own spyware — rip out Alexa and the UI itself falls over (SystemUI needs the Speech Interaction Manager; Settings needs the OOBE resources; the **mic routes through the Alexa audio stack**). So you *can* root + lightly debloat Fire OS and stop there — but a *deeply* de-Amazoned Fire OS crash-loops. LineageOS has **none** of that plumbing; it's just Android.
+
+**The port:** unofficial **LineageOS 18.1 for `cronos`** (Echo Show 5 2nd gen / 2021) by **bengris32, R0rt1z2 & FieryFlames** — they repurposed the **MT8163 Android-9 kernel + blobs** from Amazon's Fire tablets to run Android 11 on this Android-7 device. Flashes via the same TWRP you install while unlocking.
+- ✅ **Works:** touch, WiFi, Bluetooth, speaker, **mic** (a touch quiet), brightness
+- ❌ **Broken:** **camera** (device-specific MTK camera HAL/blobs not ported)
+- ⚠️ SELinux permissive · deep-sleep disabled · battery always reads 100% · **mute button = power button**
+- 📄 **Full flash guide → [docs/lineageos-migration.md](docs/lineageos-migration.md)** · ROM: [release v0.3](https://github.com/amazon-oss/releases/releases/tag/lineage-18.1-cronos-v0.3) (SHA256 `a7ae5375…`)
+
+> **TL;DR path:** unlock bootloader → TWRP → *(optional: Magisk root + light debloat)* → **flash LineageOS 18.1.** The rooting is the on-ramp; Lineage is the destination. 🐧
+
+---
+
 ## ⚠️ Read this first (legal / safety)
 
 - **This repo contains ONLY original work** (the author's apps, scripts, docs, and command sequences) and **NO Amazon-copyrighted material** — no firmware images, no `boot.img`, no `preloader/lk/tz`, no `.ab` backups, no redistributed exploit bundle. Those you obtain yourself (see the HOWTO for *what to search for and where*).
