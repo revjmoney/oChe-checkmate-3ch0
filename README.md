@@ -91,7 +91,7 @@ oChe-checkmate-3ch0/
 │   ├── godmode/                  ← GOD MODE app source + build.ps1
 │   ├── displayoff/               ← Display Off tile source + build.ps1
 │   ├── webctl/                   ← Simian Web Control (LAN web control panel)
-│   └── backyardpyro/             ← Backyard Pyro app (author's own)
+│   └── backyardpyro/             ← Backyard Pyro (note only — available at simiantactical.com)
 ├── scripts/
 │   ├── amz_hosts                 ← Amazon telemetry/OTA/ads DNS sinkhole
 │   └── voltoggle.sh              ← (abandoned) volume-combo display toggle + why it failed
