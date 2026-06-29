@@ -47,7 +47,11 @@ This is THE reversal method on this device. (Disabled-but-not-uninstalled apps s
 These look like bloat but Fire OS **system apps hard-depend on them** and crash-loop if removed:
 - **`amazon.speech.sim`** — `com.android.systemui` binds to it (`SimConnectionListener` / "SimClient");
   without it SystemUI throws `RuntimeException: SimClient was never got created` every ~10 min
-  (`com.amazon.systemui.common.SimConnectionListerner.onFinish`). Re-enable: `pm enable amazon.speech.sim`.
+  (`com.amazon.systemui.common.SimConnectionListerner.onFinish`). "Sim" = **S**peech **I**nteraction
+  **M**anager — and its APK is sneakily named `SpeechInteractionManager.apk`, NOT the package name.
+  If only disabled: `pm enable amazon.speech.sim`. If uninstalled-for-user (e.g. by the deep
+  reclaim pass): `pm install -r --user 0 /system/priv-app/SpeechInteractionManager/SpeechInteractionManager.apk`
+  then `pm enable amazon.speech.sim` (+ companion `amazon.speech.davs.davcservice`).
 - **`com.amazon.kindle.otter.oobe`** — `com.android.settings` reads a "launched countries" resource
   out of it on startup (`com.amazon.oobe.commons.accounts.CountryHelper.getLaunchedCountries`);
   without it Settings (and `SettingsProxyContentProvider`) crash with

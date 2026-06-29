@@ -15,6 +15,13 @@ adb shell "su -c 'pm trim-caches 4G'"
 ## 2. Uninstall-for-user the already-disabled Amazon bloat (frees data + odex)
 Targets only **disabled** packages whose name is Amazon/Ring/Netflix/Ivona — i.e. stuff already
 turned off and unused. Safe + reversible.
+
+> ⚠️ **WARNING — this pass uninstalled load-bearing glue in testing.** It grabs anything *currently
+> disabled* matching the name filter. If `amazon.speech.sim` or `com.amazon.kindle.otter.oobe` are
+> disabled when you run it, they get **uninstalled-for-user**, which breaks **SystemUI** and
+> **Settings** (and `pm enable` won't fix it — you must `pm install -r` the system APK; see gotchas).
+> **Make sure those two are ENABLED before running this**, or just skip the deep pass — it only frees
+> a couple hundred MB anyway.
 ```
 adb shell "su -c 'for p in \$(pm list packages -d | sed s/package://); do echo \$p | grep -qiE \"amazon|com.ring|netflix|ivona\" && pm uninstall --user 0 \$p; done'"
 ```
