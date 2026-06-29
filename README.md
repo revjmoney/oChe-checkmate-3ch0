@@ -32,7 +32,7 @@ Part of the **Simian Tactical Toolbox**. 🐒🔫
 | Display | Always-on; **one-tap "Display Off" tile / mute-button on** |
 | Bluetooth | **A2DP sink** — use it as a real BT speaker, with now-playing metadata |
 | App store | **F-Droid** |
-| Custom apps | **GOD MODE** (hidden-settings + app-killer menu) & **Display Off** — built from source |
+| Custom apps | **GOD MODE** (hidden-settings + app-killer menu), **Display Off**, **Web Control** (LAN browser panel) — built from source |
 
 ---
 
@@ -51,6 +51,7 @@ oChe-checkmate-3ch0/
 ├── apps/
 │   ├── godmode/                  ← GOD MODE app source + build.ps1
 │   ├── displayoff/               ← Display Off tile source + build.ps1
+│   ├── webctl/                   ← Simian Web Control (LAN web control panel)
 │   └── backyardpyro/             ← Backyard Pyro app (author's own)
 ├── scripts/
 │   ├── amz_hosts                 ← Amazon telemetry/OTA/ads DNS sinkhole
@@ -72,6 +73,39 @@ The full reproducible process is in **[HOWTO.md](HOWTO.md)**. High-level path:
 6. **Build your own apps** — the no-Gradle SDK pipeline (`build.ps1`).
 
 ---
+
+## 📲 Recommended apps (F-Droid, Android 7.1-friendly)
+
+This device makes a great little **rooted bench panel / BT speaker / dashboard**. All from F-Droid;
+use the **Versions** tab to grab a build that supports **Android 7.1 / API 25**, and match your
+**CPU ABI** for native apps (`getprop ro.product.cpu.abi`).
+
+**Power tools**
+- **Termux** — Linux terminal on-device (+ **Hacker's Keyboard** for real Ctrl/Esc on a touchscreen)
+- **AppManager** — inspect/disable/freeze/uninstall every app; ideal after debloating
+- **Aurora Store** — install Play Store apps anonymously, no Google account
+
+**Privacy / network**
+- **PCAPdroid** — see exactly what still phones home (verify the de-Amazon work)
+- **NetGuard** — easy no-root per-app firewall (the friendly alternative to iptables)
+- **WiFiAnalyzer** — turn the always-on screen into a live Wi-Fi spectrum monitor
+
+**Media (it's a Bluetooth speaker now)**
+- **Auxio** / **Vinyl** (local music) · **RadioDroid** / **Transistor** (internet radio)
+- **AntennaPod** (podcasts) · **NewPipe** (YouTube, no Google)
+
+**Bench / hardware / signal**
+- **Serial USB Terminal** — talk to microcontrollers / firing modules over USB-serial
+- **Frequency / Tone Generator** + a **spectrum analyzer** / **oscilloscope** app — signal bench
+- **VLC** — plays anything (match the ABI build!)
+
+**Utility**
+- **Ghost Commander** / **Material Files** (file managers) · **Markor** (notes/markdown) ·
+  **ConnectBot** (SSH client) · **Acode** (code editor)
+
+> Reminder: Fire OS blocks the GUI installer via the `no_install_unknown_sources` restriction —
+> install via `adb install -r` / root `pm install`, or set up the **F-Droid Privileged Extension**
+> (see `docs/fdroid-privileged-extension.md`) for silent on-device installs.
 
 ## 🙏 Credits / prior art (go support these)
 
